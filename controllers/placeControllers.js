@@ -1,5 +1,4 @@
 const throwError = require("../models/throwError");
-const { v4: uuidv4 } = require("uuid");
 
 const Place = require("../models/placedb");
 
