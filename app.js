@@ -17,6 +17,16 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
 
+// Connect to database and start the server
+
+mongoose
+  .connect(
+    `mongodb+srv://${process.env.db_user}:${process.env.db_password}@cluster0-e25md.mongodb.net/travelgram?retryWrites=true&w=majority`,
+    { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true }
+  )
+  .then(console.log("connected to DB"))
+  .catch((err) => console.log(err));
+
 app.use(passport.initialize());
 require("./models/passport")(passport);
 
@@ -38,15 +48,6 @@ app.use((error, req, res, next) => {
   });
 });
 
-// Connect to database and start the server
-mongoose
-  .connect(
-    `mongodb+srv://${process.env.db_user}:${process.env.db_password}@cluster0-e25md.mongodb.net/travelgram?retryWrites=true&w=majority`,
-    { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true }
-  )
-  .then(
-    app.listen(process.env.PORT || 5000, () =>
-      console.log("started and connected to DB")
-    )
-  )
-  .catch((err) => console.log(err));
+app.listen(process.env.PORT || 5000, () =>
+  console.log("started and connected to DB")
+);
