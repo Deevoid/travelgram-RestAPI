@@ -7,7 +7,7 @@ const getPlaces = async (req, res, next) => {
   try {
     result = await Place.find().exec();
   } catch (error) {
-    return next(new throwError("Could not find any data", 404));
+    return next(new throwError("Could not find any users", 404));
   }
   res.json({
     result: result.map((r) => r.toObject({ getters: true })),
@@ -55,7 +55,9 @@ const createPlace = async (req, res, next) => {
   try {
     await createdPlace.save();
   } catch (err) {
-    return next(new throwError("Could not save to DB", 500));
+    return next(
+      new throwError("Could not save your place. Please try again later.", 500)
+    );
   }
   res.status(200).json(createdPlace);
 };
@@ -73,7 +75,7 @@ const updatePlace = async (req, res, next) => {
   } catch (error) {
     return next(new throwError("Could not update data", 500));
   }
-  res.status(200).json({ message: "updated successfully", updatedPlace });
+  res.status(200).json({ message: "Updated successfully", updatedPlace });
 };
 
 const deletePlace = async (req, res, next) => {
@@ -88,7 +90,7 @@ const deletePlace = async (req, res, next) => {
   if (place.length <= 0) {
     throw new throwError("no place found ", 404);
   }
-  res.status(200).json({ message: "deleted successfully" });
+  res.status(200).json({ message: "Deleted successfully" });
 };
 
 module.exports = {

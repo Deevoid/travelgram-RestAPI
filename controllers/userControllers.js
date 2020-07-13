@@ -73,7 +73,7 @@ const login = (req, res, next) => {
 
   User.findOne({ email }).then((user) => {
     if (!user) {
-      res.status(404).json("No user found");
+      res.status(404).json({ message: "Invalid User" });
     }
     bcrypt.compare(password, user.password).then((isMatch) => {
       if (isMatch) {
@@ -93,7 +93,7 @@ const login = (req, res, next) => {
           }
         );
       } else {
-        return res.status(400).json("Password Incorrect");
+        return res.status(400).json({ message: "Password Incorrect" });
       }
     });
   });
