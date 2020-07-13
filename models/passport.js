@@ -4,7 +4,7 @@ const User = require("./userdb");
 
 const opts = {};
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-opts.secretOrKey = process.env.secretOrKey;
+opts.secretOrKey = process.env.SECRET;
 
 module.exports = (passport) => {
   passport.use(

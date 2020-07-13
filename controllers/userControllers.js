@@ -83,7 +83,7 @@ const login = (req, res, next) => {
         };
         jwt.sign(
           payload,
-          process.env.secretOrkey,
+          process.env.SECRET,
           { expiresIn: 12345 },
           (err, token) => {
             console.log(process.env.SECRET);
