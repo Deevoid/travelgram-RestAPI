@@ -84,8 +84,9 @@ const login = (req, res, next) => {
         jwt.sign(
           payload,
           process.env.secretOrkey,
-          { expiresIn: 55555 },
+          { expiresIn: 12345 },
           (err, token) => {
+            console.log(process.env.secretOrkey);
             res.json({
               success: true,
               token: "Bearer" + token,
