@@ -86,7 +86,6 @@ const login = (req, res, next) => {
           process.env.SECRET,
           { expiresIn: 12345 },
           (err, token) => {
-            console.log(process.env.SECRET);
             res.json({
               success: true,
               token: "Bearer" + token,
